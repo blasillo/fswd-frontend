@@ -1,9 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import {Tarea} from "../../modelos/tarea";
 import {TareaService} from "../../servicios/tarea.service";
-import {ButtonModule} from "primeng/button";
-import {ProgressBarModule} from "primeng/progressbar";
 import { CommonModule } from '@angular/common'
+import {DialogModule} from "primeng/dialog";
+
+import { ButtonModule } from 'primeng/button';
+import { ProgressBarModule } from 'primeng/progressbar';
+;
 
 @Component({
   selector: 'app-listado-tareas',
@@ -11,15 +16,18 @@ import { CommonModule } from '@angular/common'
   imports: [
     CommonModule,
     ButtonModule,
-    ProgressBarModule
+    ProgressBarModule,
+    DialogModule, ButtonModule,
   ],
   templateUrl: './listado-tareas.component.html',
   styleUrl: './listado-tareas.component.css'
 })
 export class ListadoTareasComponent  implements OnInit {
 
-  tareas!: Tarea[];
 
+  tareas!: Tarea[];
+  dialogoVisible = false
+  etiquetaAccion = 'Crear Tarea'
 
   email: string = 'formacion@eclap.jcyl.es';
 
@@ -43,5 +51,11 @@ export class ListadoTareasComponent  implements OnInit {
       }
     );
   }
+
+  mostrarFormulario() {
+    this.dialogoVisible = true
+    this.etiquetaAccion = 'Crear Tarea'
+  }
+
 
 }
